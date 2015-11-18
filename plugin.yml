@@ -1,0 +1,8 @@
+name: ParksQuest
+main: net.ryanhecht.ParksQuest.Main
+version: 0.1
+description: Parksin the Quest
+author: RyanHecht_ & others
+commands:
+  pq:
+    description: Does the thing
