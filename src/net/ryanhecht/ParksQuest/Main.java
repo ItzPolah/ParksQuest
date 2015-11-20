@@ -21,6 +21,7 @@ public class Main extends JavaPlugin {
 			NPC npc = new NPC(player.getLocation());
 			double dx = Double.parseDouble(args[0]);
 			npc.walk(new Location(player.getWorld(), player.getLocation().getX()+dx, player.getLocation().getY(), player.getLocation().getZ()));
+			
 		}
 		return false;
 	}
