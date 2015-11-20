@@ -28,6 +28,7 @@ public class NPC {
                 	this.cancel();
                 }
                 else {
+                	//currently, they just flail their arms and legs around, it's actually quite funny
                 	stand.setVelocity(new Vector(0.2,0,0));
                 	stand.setLeftArmPose(new EulerAngle(stand.getLeftArmPose().getX()-1, stand.getLeftArmPose().getY(), stand.getLeftArmPose().getZ()));
                 	stand.setRightArmPose(new EulerAngle(stand.getLeftArmPose().getX()+1, stand.getLeftArmPose().getY(), stand.getLeftArmPose().getZ()));
