@@ -20,7 +20,8 @@ public class Main extends JavaPlugin {
 		if(cmd.getName().equalsIgnoreCase("pq")) {
 			NPC npc = new NPC(player.getLocation());
 			double dx = Double.parseDouble(args[0]);
-			npc.walk(new Location(player.getWorld(), player.getLocation().getX()+dx, player.getLocation().getY(), player.getLocation().getZ()));
+			double v = Double.parseDouble(args[1]);
+			npc.walk(new Location(player.getWorld(), player.getLocation().getX()+dx, player.getLocation().getY(), player.getLocation().getZ()),v);
 			
 		}
 		return false;

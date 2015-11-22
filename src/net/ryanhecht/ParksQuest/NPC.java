@@ -12,6 +12,7 @@ public class NPC {
 	Plugin plugin = Main.getPlugin();
 	ArmorStand stand;
 	Integer i;
+	int j=0;
 	public NPC(Location l) {
 		
 		stand = l.getWorld().spawn(l, ArmorStand.class);
@@ -20,7 +21,7 @@ public class NPC {
 		stand.setMarker(true);
 		i=Integer.valueOf(1);
 	}
-	void walk(final Location d) {
+	void walk(final Location d, final double v) {
         new BukkitRunnable() {
         	
             @Override
@@ -32,41 +33,41 @@ public class NPC {
                 	this.cancel();
                 }
                 else {
-                	//currently, they just flail their arms and legs around, it's actually quite funny
-                	stand.setVelocity(new Vector(0.2,0,0));    
+                	stand.setVelocity(new Vector(v,0,0));
                 	walkAnimate();
                 }
             }
            
         }.runTaskTimer(plugin, 1, 1);
-        Bukkit.getServer().getLogger().info("test");
 	}
 	private void walkAnimate() {
+		j++;
+		double w=stand.getVelocity().getX() * (Math.PI/4);
 		if(i.equals(1)) {
-           	stand.setLeftArmPose(new EulerAngle(stand.getLeftArmPose().getX()-(Math.PI/20), stand.getLeftArmPose().getY(), stand.getLeftArmPose().getZ()));
-        	stand.setRightArmPose(new EulerAngle(stand.getRightArmPose().getX()+(Math.PI/20), stand.getRightArmPose().getY(), stand.getRightArmPose().getZ()));
-        	stand.setLeftLegPose(new EulerAngle(stand.getLeftLegPose().getX()+(Math.PI/20), stand.getLeftLegPose().getY(), stand.getLeftLegPose().getZ()));
-        	stand.setRightLegPose(new EulerAngle(stand.getRightLegPose().getX()-(Math.PI/20), stand.getRightLegPose().getY(), stand.getRightLegPose().getZ()));
-
+           	stand.setLeftArmPose(new EulerAngle(stand.getLeftArmPose().getX()-w, stand.getLeftArmPose().getY(), stand.getLeftArmPose().getZ()));
+        	stand.setRightArmPose(new EulerAngle(stand.getRightArmPose().getX()+w, stand.getRightArmPose().getY(), stand.getRightArmPose().getZ()));
+        	stand.setLeftLegPose(new EulerAngle(stand.getLeftLegPose().getX()+w, stand.getLeftLegPose().getY(), stand.getLeftLegPose().getZ()));
+        	stand.setRightLegPose(new EulerAngle(stand.getRightLegPose().getX()-w, stand.getRightLegPose().getY(), stand.getRightLegPose().getZ()));
+        	
 		}
 		if(i.equals(-1)) {
-           	stand.setLeftArmPose(new EulerAngle(stand.getLeftArmPose().getX()+(Math.PI/20), stand.getLeftArmPose().getY(), stand.getLeftArmPose().getZ()));
-        	stand.setRightArmPose(new EulerAngle(stand.getRightArmPose().getX()-(Math.PI/20), stand.getRightArmPose().getY(), stand.getRightArmPose().getZ()));
-        	stand.setLeftLegPose(new EulerAngle(stand.getLeftLegPose().getX()-(Math.PI/20), stand.getLeftLegPose().getY(), stand.getLeftLegPose().getZ()));
-        	stand.setRightLegPose(new EulerAngle(stand.getRightLegPose().getX()+(Math.PI/20), stand.getRightLegPose().getY(), stand.getRightLegPose().getZ()));
+           	stand.setLeftArmPose(new EulerAngle(stand.getLeftArmPose().getX()+w, stand.getLeftArmPose().getY(), stand.getLeftArmPose().getZ()));
+        	stand.setRightArmPose(new EulerAngle(stand.getRightArmPose().getX()-w, stand.getRightArmPose().getY(), stand.getRightArmPose().getZ()));
+        	stand.setLeftLegPose(new EulerAngle(stand.getLeftLegPose().getX()-w, stand.getLeftLegPose().getY(), stand.getLeftLegPose().getZ()));
+        	stand.setRightLegPose(new EulerAngle(stand.getRightLegPose().getX()+w, stand.getRightLegPose().getY(), stand.getRightLegPose().getZ()));
 		}
 		if(i.equals(0)) {
         	stand.setLeftArmPose(new EulerAngle(0,0,0));
         	stand.setRightArmPose(new EulerAngle(0,0,0));
         	stand.setRightLegPose(new EulerAngle(0,0,0));
-        	stand.setLeftLegPose(new EulerAngle(0,0,0));	
+        	stand.setLeftLegPose(new EulerAngle(0,0,0));
+        	Bukkit.getServer().getLogger().info(""+j);
 		}
 		if(Math.abs(stand.getLeftArmPose().getX() - (Math.PI/4)) <= .1) {
 			i = new Integer(1);
 		}
 		if(Math.abs(stand.getLeftArmPose().getX() + (Math.PI/4)) <= .1) {
-			i = new Integer(-1);
+			i = new Integer(-1);	
 		}
-		Bukkit.getServer().getLogger().info((Math.abs(stand.getLeftArmPose().getX())+""));
 	}
 }
