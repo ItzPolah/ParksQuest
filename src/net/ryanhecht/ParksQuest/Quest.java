@@ -1,5 +1,7 @@
 package net.ryanhecht.ParksQuest;
 
-public interface Quest {
+import java.util.ArrayList;
 
+public interface Quest {
+	public ArrayList<Boolean> stuff = new ArrayList<Boolean>();
 }

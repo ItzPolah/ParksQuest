@@ -10,7 +10,7 @@ import org.bukkit.util.Vector;
 //Everything WIP, of course, and still messy as I work on stuff
 public class NPC {
 	Plugin plugin = Main.getPlugin();
-	ArmorStand stand;
+	protected ArmorStand stand;
 	Integer i;
 	int j=0;
 	public NPC(Location l) {
@@ -21,7 +21,10 @@ public class NPC {
 		stand.setMarker(true);
 		i=Integer.valueOf(1);
 	}
-	void walk(final Location d, final double v) {
+	public NPC() {
+		
+	}
+	protected void walk(final Location d, final double v) {
         new BukkitRunnable() {
         	
             @Override
